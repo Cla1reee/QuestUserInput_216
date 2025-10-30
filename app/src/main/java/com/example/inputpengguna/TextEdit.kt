@@ -1,9 +1,21 @@
 package com.example.inputpengguna
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.material.icons.Icons
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.ui.Alignment
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -60,9 +72,16 @@ fun FormDataDiri(modifer: Modifier
         outlinedTextField(
             value = textAlamat,
             singleLine = true,
-            shape = MaterialTheme.shapes.large,
-            label = { Text(text = "Alamat") },
+            modifier = Modifier.width(width = 250.dp),
+            label = { Text(text = "Alamat Lengkap") },
             onValueChange = {
-                textAlamat = it },
+                textAlamat = it }
         )
+
+        HorizontalDivider(
+            modifier = Modifier.padding(
+                bottom = dimensionResource(R.dimen.padding_medium),
+                top = dimensionResource(
+                    R.dimen.padding_medium)
+        )),
 }
