@@ -15,6 +15,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 
@@ -84,4 +85,11 @@ fun FormDataDiri(modifer: Modifier
                 top = dimensionResource(
                     R.dimen.padding_medium)
         )),
+        thickness = dimensionResource(id = R.dimen.diivider_tipis),
+        color = Color.DarkGray
+        )
+
+        button(
+
+        )
 }
