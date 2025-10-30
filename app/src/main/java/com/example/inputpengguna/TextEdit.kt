@@ -1,5 +1,8 @@
 package com.example.inputpengguna
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.ui.unit.dp
+
 @Composable
 fun FormDataDiri(modifer: Modifier
 ){
@@ -12,4 +15,14 @@ fun FormDataDiri(modifer: Modifier
     var jenis by remember { mutableStateOf(value"") }
 
     val gender:List<string> = listOf("Laki-laki","Perempuan")
+
+    column(modifer = Modifer.padding(top = 50.dp),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally) {
+        OutlinedTextField(
+            value = textNama,
+            singleLine = true,
+            shape = MaterialTheme.shapes.large,
+        )
+    }
 }
