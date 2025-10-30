@@ -2,6 +2,7 @@ package com.example.inputpengguna
 
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.icons.Icons
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
@@ -56,5 +57,12 @@ fun FormDataDiri(modifer: Modifier
             }
         }
     }
-
+        outlinedTextField(
+            value = textAlamat,
+            singleLine = true,
+            shape = MaterialTheme.shapes.large,
+            label = { Text(text = "Alamat") },
+            onValueChange = {
+                textAlamat = it },
+        )
 }
