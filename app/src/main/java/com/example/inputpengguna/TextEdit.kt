@@ -2,6 +2,7 @@ package com.example.inputpengguna
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.HorizontalDivider
@@ -90,6 +91,12 @@ fun FormDataDiri(modifer: Modifier
         )
 
         button(
-
+            modifier = Modifier.fillMaxWidth(if),
+            enabled = textAlamat.isNotEmpty(),
+            onClick = {
+                nama = textNama
+                alamat = textAlamat
+                jenis = textJK
+            }
         )
 }
