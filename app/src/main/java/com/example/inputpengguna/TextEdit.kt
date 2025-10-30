@@ -1,11 +1,13 @@
 package com.example.inputpengguna
 
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.icons.Icons
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun FormDataDiri(modifer: Modifier
-){
+) {
     var textNama by remember { mutableStateOf(value"") }
     var textAlamat by remember { mutableStateOf(value"") }
     var textJK by remember { mutableStateOf(value"") }
@@ -45,8 +47,14 @@ fun FormDataDiri(modifer: Modifier
                 Row(modifier = Modifier.selectable(
                     selected = textJK == item,
                     onClick = { textJK = item }
-                )
+                ), verticalAlignment = Alignment.CenterVertically) {
+                    RadioButton(
+                        selected = textJK == item,
+                        onClick = { textJK = item }
+                    )
+                    Text(text = item)
             }
         }
     }
+
 }
