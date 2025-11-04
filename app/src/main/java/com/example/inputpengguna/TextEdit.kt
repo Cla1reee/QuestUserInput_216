@@ -1,20 +1,21 @@
 package com.example.inputpengguna
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,50 +26,64 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-// Impor R dari paket aplikasi Anda
-import com.example.inputpengguna.R
+import androidx.compose.ui.unit.sp
 
 @Composable
-fun FormDataDiri(modifier: Modifier = Modifier) {
-    // State untuk input pengguna
+fun FormulirPendaftaran(modifier: Modifier = Modifier) {
     var textNama by remember { mutableStateOf("") }
     var textAlamat by remember { mutableStateOf("") }
     var textJK by remember { mutableStateOf("") }
+    var textStatus by remember { mutableStateOf("") }
 
-    // State untuk menyimpan data setelah submit
-    var nama by remember { mutableStateOf("") }
-    var alamat by remember { mutableStateOf("") }
-    var jenis by remember { mutableStateOf("") }
+    val listJenisKelamin: List<String> = listOf("Laki-laki", "Perempuan")
+    val listStatus: List<String> = listOf("Janda", "Lajang", "Duda")
 
-    val gender: List<String> = listOf("Laki-laki", "Perempuan")
+    Column(modifier = modifier.fillMaxSize()) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color(0xFF8A2BE2)) // Warna Ungu (BlueViolet)
+                .padding(vertical = 24.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Formulir Pendaftaran",
+                color = Color.White,
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
 
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        OutlinedTextField(
-            value = textNama,
-            singleLine = true,
-            modifier = Modifier.fillMaxWidth(),
-            shape = MaterialTheme.shapes.large,
-            label = { Text(text = "Nama Lengkap") },
-            onValueChange = { textNama = it }
-        )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 24.dp, vertical = 20.dp),
+            horizontalAlignment = Alignment.Start
+        ) {
 
-        // Pilihan Jenis Kelamin
-        Column(Modifier.fillMaxWidth()) {
-            Text(text = "Jenis Kelamin:")
-            Row {
-                gender.forEach { item ->
+            Text(text = "NAMA LENGKAP", fontSize = 12.sp, color = Color.Gray)
+            OutlinedTextField(
+                value = textNama,
+                onValueChange = { textNama = it },
+                placeholder = { Text("Isian nama lengkap") },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color(0xFF8A2BE2),
+                    unfocusedBorderColor = Color.LightGray
+                )
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+
+            Text(text = "JENIS KELAMIN", fontSize = 12.sp, color = Color.Gray)
+            Column {
+                listJenisKelamin.forEach { item ->
                     Row(
                         modifier = Modifier.selectable(
                             selected = textJK == item,
@@ -76,71 +91,66 @@ fun FormDataDiri(modifier: Modifier = Modifier) {
                         ),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        RadioButton(
-                            selected = textJK == item,
-                            onClick = { textJK = item }
-                        )
+                        RadioButton(selected = textJK == item, onClick = { textJK = item })
                         Text(text = item)
                     }
                 }
             }
-        }
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
-        OutlinedTextField(
-            value = textAlamat,
-            singleLine = true,
-            modifier = Modifier.fillMaxWidth(),
-            label = { Text(text = "Alamat Lengkap") },
-            onValueChange = { textAlamat = it }
-        )
 
-        Spacer(modifier = Modifier.height(32.dp))
-
-        Button(
-            modifier = Modifier.fillMaxWidth(),
-            enabled = textNama.isNotEmpty() && textAlamat.isNotEmpty() && textJK.isNotEmpty(),
-            onClick = {
-                nama = textNama
-                alamat = textAlamat
-                jenis = textJK
+            Text(text = "STATUS PERKAWINAN", fontSize = 12.sp, color = Color.Gray)
+            Column {
+                listStatus.forEach { item ->
+                    Row(
+                        modifier = Modifier.selectable(
+                            selected = textStatus == item,
+                            onClick = { textStatus = item }
+                        ),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(selected = textStatus == item, onClick = { textStatus = item })
+                        Text(text = item)
+                    }
+                }
             }
-        ) {
-            Text(text = stringResource(id = R.string.submit))
-        }
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
-        HorizontalDivider(
-            modifier = Modifier.fillMaxWidth(),
-            thickness = 1.dp,
-            color = Color.Gray
-        )
+            // --- ALAMAT ---
+            Text(text = "ALAMAT", fontSize = 12.sp, color = Color.Gray)
+            OutlinedTextField(
+                value = textAlamat,
+                onValueChange = { textAlamat = it },
+                placeholder = { Text("Alamat") },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color(0xFF8A2BE2),
+                    unfocusedBorderColor = Color.LightGray
+                )
+            )
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.weight(1f))
 
-        // Menampilkan hasil input dalam ElevatedCard
-        ElevatedCard(
-            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF333333)), // Warna abu-abu gelap
-            modifier = Modifier
-                .width(300.dp)
-        ) {
-            Column(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp) // Memberi jarak antar teks
+            Button(
+                onClick = { /* TODO: Handle a submissão dos dados */ },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6200EE))
             ) {
-                Text(text = "Nama   : " + nama, color = Color.White)
-                Text(text = "Gender : " + jenis, color = Color.White)
-                Text(text = "Alamat : " + alamat, color = Color.White)
+                Text(text = "Submit", color = Color.White, fontSize = 16.sp)
             }
         }
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
-fun FormDataDiriPreview() {
-    FormDataDiri()
+fun FormulirPendaftaranPreview() {
+    FormulirPendaftaran()
 }
