@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Color.White
                 ) {
-                    FormDataDiri()
+                    FormulirPendaftaran()
                 }
             }
         }
@@ -44,6 +44,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     InputPenggunaTheme {
-        FormDataDiri()
+        FormulirPendaftaran()
     }
 }
